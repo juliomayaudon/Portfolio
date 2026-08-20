@@ -13,18 +13,25 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
 <nav>
   <div class="wrap">
     <a href="/" class="brand">Julio Mayaudon<span>.</span></a>
-    <div class="navlinks">
-      {links.map((l) => (
-        <a href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}>
-          <T en={l.en} es={l.es} />
-        </a>
-      ))}
-    </div>
-    <div class="nav-right">
-      <button class="toggle" type="button" onclick="toggleLang()" aria-label="Toggle language / cambiar idioma">
-        <span id="t-en" class="on">EN</span><span class="sep">/</span><span id="t-es">ES</span>
-      </button>
-      <a href="/#contact" class="btn sm"><T en="Contact" es="Contacto" /></a>
+    <button class="navtoggle" type="button" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+      </svg>
+    </button>
+    <div class="navmenu">
+      <div class="navlinks">
+        {links.map((l) => (
+          <a href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}>
+            <T en={l.en} es={l.es} />
+          </a>
+        ))}
+      </div>
+      <div class="nav-right">
+        <button class="toggle" type="button" onclick="toggleLang()" aria-label="Toggle language / cambiar idioma">
+          <span id="t-en" class="on">EN</span><span class="sep">/</span><span id="t-es">ES</span>
+        </button>
+        <a href="/#contact" class="btn sm"><T en="Contact" es="Contacto" /></a>
+      </div>
     </div>
   </div>
 </nav>

@@ -48,6 +48,25 @@ const {
         try { localStorage.setItem('pf-lang', next); } catch (e) {}
         syncToggles();
       }
+      function toggleMenu() {
+        var nav = document.querySelector('nav');
+        if (!nav) return;
+        var open = nav.getAttribute('data-open') === 'true';
+        nav.setAttribute('data-open', open ? 'false' : 'true');
+        var btn = nav.querySelector('.navtoggle');
+        if (btn) btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      }
+      window.toggleMenu = toggleMenu;
+      document.addEventListener('click', function (e) {
+        var nav = document.querySelector('nav');
+        if (!nav || nav.getAttribute('data-open') !== 'true') return;
+        var t = e.target;
+        if (t.closest('.navlinks a') || t.closest('.nav-right a')) {
+          nav.setAttribute('data-open', 'false');
+          var btn = nav.querySelector('.navtoggle');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+        }
+      });
       function syncToggles() {
         var r = document.documentElement;
         var lang = r.getAttribute('data-lang');
