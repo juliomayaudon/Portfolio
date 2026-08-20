@@ -1,0 +1,47 @@
+<svg viewBox="-40 -80 1200 1090" role="img" aria-label="Graviny backend component diagram: the public form submits leads and subscribers, the admin logs in through a secured auth component and manages leads on a dashboard, all persisted to MySQL">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0.5,0.8 L9,5 L0.5,9.2" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text class="h" x="40" y="40" font-size="22" text-anchor="start">Graviny: the backend (component diagram)</text>
+<text class="mut" x="42" y="66" font-size="13" text-anchor="start">C4 level 3 · lead capture + secured admin auth on a PHP / MySQL API</text>
+<g transform="rotate(-0.5 185 202)"><rect class="bx dev" x="60" y="150" width="250" height="104" rx="10"/></g>
+<text class="t" x="78" y="181" font-size="19" text-anchor="start">Public form</text>
+<text class="a-dev" x="78" y="202" font-size="13" text-anchor="start">React (public site)</text>
+<text class="mut" x="78" y="222" font-size="12.5" text-anchor="start">contact + newsletter</text>
+<g transform="rotate(0.5 185 462)"><rect class="bx dev" x="60" y="410" width="250" height="104" rx="10"/></g>
+<text class="t" x="78" y="441" font-size="19" text-anchor="start">Admin portal</text>
+<text class="a-dev" x="78" y="462" font-size="13" text-anchor="start">React · Recharts</text>
+<text class="mut" x="78" y="482" font-size="12.5" text-anchor="start">login + dashboard</text>
+<g transform="rotate(0.4 575 172)"><rect class="bx pm" x="430" y="120" width="290" height="104" rx="10"/></g>
+<text class="t" x="448" y="151" font-size="19" text-anchor="start">Leads + Subscribers</text>
+<text class="a-pm" x="448" y="172" font-size="13" text-anchor="start">capture endpoints</text>
+<text class="mut" x="448" y="192" font-size="12.5" text-anchor="start">store + set status</text>
+<g transform="rotate(-0.4 575 352)"><rect class="bx pm" x="430" y="300" width="290" height="104" rx="10"/></g>
+<text class="t" x="448" y="331" font-size="19" text-anchor="start">Auth</text>
+<text class="a-pm" x="448" y="352" font-size="13" text-anchor="start">secured</text>
+<text class="mut" x="448" y="372" font-size="12.5" text-anchor="start">bcrypt · login-attempt throttle</text>
+<text class="mut" x="448" y="388" font-size="12.5" text-anchor="start">token sessions</text>
+<g transform="rotate(0.4 575 532)"><rect class="bx pm" x="430" y="480" width="290" height="104" rx="10"/></g>
+<text class="t" x="448" y="511" font-size="19" text-anchor="start">Admin API</text>
+<text class="a-pm" x="448" y="532" font-size="13" text-anchor="start">authenticated</text>
+<text class="mut" x="448" y="552" font-size="12.5" text-anchor="start">read / manage leads</text>
+<text class="mut" x="448" y="568" font-size="12.5" text-anchor="start">subscribers · content</text>
+<g><rect class="bx ext" x="800" y="150" width="270" height="88" rx="10"/></g>
+<text class="a-ext" x="820" y="178" font-size="13.5" text-anchor="start">WordPress</text>
+<text class="mut" x="820" y="198" font-size="12" text-anchor="start">headless blog</text>
+<text class="mut" x="820" y="218" font-size="12" text-anchor="start">read by public site</text>
+<path class="flow" d="M310,202 L430,172" marker-end="url(#ah)"/>
+<text class="mut" x="370.0" y="181.0" font-size="12" text-anchor="middle">submit</text>
+<path class="flow" d="M280,150 C280,86 905,86 905,150" marker-end="url(#ah)"/>
+<text class="mut" x="592" y="78" font-size="12" text-anchor="middle">blog · REST</text>
+<path class="flow" d="M310,462 L430,352" marker-end="url(#ah)"/>
+<text class="mut" x="370.0" y="401.0" font-size="12" text-anchor="middle">login</text>
+<path class="flow" d="M575,404 L575,480" marker-end="url(#ah)"/>
+<text class="mut" x="645.0" y="446.0" font-size="12" text-anchor="start">session</text>
+<path class="flow" d="M185,514 Q308,514 430,532" marker-end="url(#ah)"/>
+<text class="mut" x="307.5" y="517.0" font-size="12" text-anchor="middle">manage</text>
+<g><rect class="bx abm" x="380" y="650" width="700" height="120" rx="10"/></g>
+<text class="t" x="402" y="684" font-size="18" text-anchor="start">MySQL</text>
+<text class="mut" x="402" y="708" font-size="13" text-anchor="start">leads · subscribers · admin_users</text>
+<text class="mut" x="402" y="728" font-size="13" text-anchor="start">auth_tokens · login_attempts</text>
+<path class="flow" d="M575,584 L575,650" marker-end="url(#ah)"/>
+<text class="mut" x="641.0" y="617.0" font-size="12" text-anchor="start">persist</text>
+</svg>

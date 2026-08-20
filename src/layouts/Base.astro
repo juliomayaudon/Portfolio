@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Julio Mayaudon - Technical Project Manager & Builder',
+  description = 'Technical Project Manager and builder. I run ABM programs and build the products, LMS platforms, and automation that power them.',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en" data-lang="en" data-style="minimal">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <!-- Apply saved language before paint to avoid a flash. Style is fixed to minimal. -->
+    <script is:inline>
+      (function () {
+        try {
+          var l = localStorage.getItem('pf-lang') || 'en';
+          var r = document.documentElement;
+          r.setAttribute('data-lang', l);
+          r.setAttribute('lang', l);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <script is:inline>
+      function toggleLang() {
+        var r = document.documentElement;
+        var next = r.getAttribute('data-lang') === 'en' ? 'es' : 'en';
+        r.setAttribute('data-lang', next);
+        r.setAttribute('lang', next);
+        try { localStorage.setItem('pf-lang', next); } catch (e) {}
+        syncToggles();
+      }
+      function syncToggles() {
+        var r = document.documentElement;
+        var lang = r.getAttribute('data-lang');
+        var le = document.getElementById('t-en'), ls = document.getElementById('t-es');
+        if (le) le.classList.toggle('on', lang === 'en');
+        if (ls) ls.classList.toggle('on', lang === 'es');
+      }
+      window.toggleLang = toggleLang;
+      document.addEventListener('DOMContentLoaded', syncToggles);
+      syncToggles();
+    </script>
+  </body>
+</html>

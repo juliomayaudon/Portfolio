@@ -1,0 +1,79 @@
+<svg viewBox="-36 -64 1362 1008" role="img" aria-label="Acopio Venezuela container diagram: public visitors and team members use one Next.js app whose public pages and protected dashboards call a REST API that authorizes by role and persists to PostgreSQL, with NextAuth, Cloudinary, map tiles and an optional LLM, deployed on Railway">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0.5,0.8 L9,5 L0.5,9.2" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text class="h" x="40" y="40" font-size="22" text-anchor="start">Acopio Venezuela: container diagram</text>
+<text class="mut" x="42" y="66" font-size="13" text-anchor="start">C4 level 2 · one Next.js app (public pages + protected dashboards + REST API) on PostgreSQL · deployed on Railway</text>
+<circle class="actor" cx="450" cy="86" r="11"/>
+<line class="actor" x1="450" y1="97" x2="450" y2="116"/>
+<path class="actor" d="M434,120 q16,-22 32,0"/>
+<text class="a-ext" x="450" y="142" font-size="13" text-anchor="middle">Public visitor</text>
+<circle class="actor" cx="810" cy="86" r="11"/>
+<line class="actor" x1="810" y1="97" x2="810" y2="116"/>
+<path class="actor" d="M794,120 q16,-22 32,0"/>
+<text class="a-ext" x="810" y="142" font-size="13" text-anchor="middle">Team member</text>
+<g transform="rotate(-0.5 450 226)"><rect class="bx dev" x="300" y="170" width="300" height="112" rx="10"/></g>
+<text class="t" x="318" y="201" font-size="19" text-anchor="start">Public pages</text>
+<text class="a-dev" x="318" y="222" font-size="13" text-anchor="start">Next.js · public</text>
+<text class="mut" x="318" y="242" font-size="12.5" text-anchor="start">homepage · center pages · map</text>
+<text class="mut" x="318" y="258" font-size="12.5" text-anchor="start">open registration</text>
+<g transform="rotate(0.5 810 226)"><rect class="bx dev" x="650" y="170" width="320" height="112" rx="10"/></g>
+<text class="t" x="668" y="201" font-size="19" text-anchor="start">Protected app</text>
+<text class="a-dev" x="668" y="222" font-size="13" text-anchor="start">Next.js · dashboards</text>
+<text class="mut" x="668" y="242" font-size="12.5" text-anchor="start">donations · shipments · consumption</text>
+<text class="mut" x="668" y="258" font-size="12.5" text-anchor="start">admin portal · catalog</text>
+<path class="flow" d="M450,140 L450,170" marker-end="url(#ah)"/>
+<path class="flow" d="M810,140 L810,170" marker-end="url(#ah)"/>
+<g transform="rotate(-0.4 165 430)"><rect class="bx pm" x="40" y="372" width="250" height="116" rx="10"/></g>
+<text class="t" x="58" y="403" font-size="19" text-anchor="start">Auth</text>
+<text class="a-pm" x="58" y="424" font-size="13" text-anchor="start">NextAuth · JWT</text>
+<text class="mut" x="58" y="444" font-size="12.5" text-anchor="start">credentials · bcrypt</text>
+<text class="mut" x="58" y="460" font-size="12.5" text-anchor="start">5 roles</text>
+<g transform="rotate(0.4 580 438)"><rect class="bx pm" x="380" y="372" width="400" height="132" rx="10"/></g>
+<text class="t" x="398" y="403" font-size="19" text-anchor="start">REST API</text>
+<text class="a-pm" x="398" y="424" font-size="13" text-anchor="start">Next.js route handlers</text>
+<text class="mut" x="398" y="444" font-size="12.5" text-anchor="start">authorize by role · scoped writes</text>
+<text class="mut" x="398" y="460" font-size="12.5" text-anchor="start">inventory in transactions</text>
+<path class="flow" d="M450,282 Q460,282 470,372" marker-end="url(#ah)"/>
+<text class="mut" x="430" y="330" font-size="12" text-anchor="middle">data</text>
+<path class="flow" d="M810,282 Q755,282 700,372" marker-end="url(#ah)"/>
+<text class="mut" x="760" y="330" font-size="12" text-anchor="middle">session · JWT</text>
+<path class="flow" d="M290,430 L380,438" marker-end="url(#ah)"/>
+<text class="mut" x="335.0" y="428.0" font-size="12" text-anchor="middle">verifies</text>
+<g transform="rotate(-0.5 580 696)"><rect class="bx abm" x="410" y="636" width="340" height="120" rx="10"/></g>
+<text class="t" x="428" y="667" font-size="19" text-anchor="start">PostgreSQL</text>
+<text class="a-abm" x="428" y="688" font-size="13" text-anchor="start">Prisma 5</text>
+<text class="mut" x="428" y="708" font-size="12.5" text-anchor="start">centers · users · products</text>
+<text class="mut" x="428" y="724" font-size="12.5" text-anchor="start">donations · shipments · inventory</text>
+<path class="flow" d="M580,504 L580,636" marker-end="url(#ah)"/>
+<text class="mut" x="650" y="575" font-size="12" text-anchor="start">SQL · Prisma</text>
+<g><rect class="bx ext" x="1000" y="170" width="260" height="74" rx="10"/></g>
+<text class="a-ext" x="1018" y="200" font-size="13.5" text-anchor="start">Map tiles (OSM)</text>
+<text class="mut" x="1018" y="222" font-size="12" text-anchor="start">Leaflet basemap</text>
+<g><rect class="bx ext" x="1000" y="384" width="260" height="74" rx="10"/></g>
+<text class="a-ext" x="1018" y="414" font-size="13.5" text-anchor="start">Cloudinary</text>
+<text class="mut" x="1018" y="436" font-size="12" text-anchor="start">donation + shipment photos</text>
+<g><rect class="bx ext" x="1000" y="478" width="260" height="74" rx="10"/></g>
+<text class="a-ext" x="1018" y="508" font-size="13.5" text-anchor="start">LLM (optional)</text>
+<text class="mut" x="1018" y="530" font-size="12" text-anchor="start">CSV product matching</text>
+<path class="flow" d="M970,226 L1000,207" marker-end="url(#ah)"/>
+<path class="flow" d="M780,438 L1000,421" marker-end="url(#ah)"/>
+<text class="mut" x="890.0" y="423.5" font-size="12" text-anchor="middle">upload</text>
+<path class="flow" d="M780,470 L1000,515" marker-end="url(#ah)"/>
+<text class="mut" x="890.0" y="486.5" font-size="12" text-anchor="middle">match</text>
+<text class="t" x="40" y="780" font-size="16" text-anchor="start">Deploy</text>
+<g><rect class="bx ext" x="40" y="796" width="220" height="56" rx="10"/></g>
+<text class="a-ext" x="58" y="820" font-size="12.5" text-anchor="start">git push</text>
+<text class="mut" x="58" y="838" font-size="11" text-anchor="start">master branch</text>
+<g><rect class="bx ext" x="300" y="796" width="220" height="56" rx="10"/></g>
+<text class="a-ext" x="318" y="820" font-size="12.5" text-anchor="start">Railway</text>
+<text class="mut" x="318" y="838" font-size="11" text-anchor="start">auto redeploy</text>
+<path class="flow" d="M260,824 L300,824" marker-end="url(#ah)"/>
+<text class="legend" x="1000" y="626" font-size="13" text-anchor="start">Legend</text>
+<rect class="bx dev" x="1000" y="636" width="20" height="14" rx="3"/>
+<text class="legend" x="1028" y="648" font-size="12" text-anchor="start">frontend (Next.js)</text>
+<rect class="bx pm" x="1000" y="658" width="20" height="14" rx="3"/>
+<text class="legend" x="1028" y="670" font-size="12" text-anchor="start">backend / auth</text>
+<rect class="bx abm" x="1000" y="680" width="20" height="14" rx="3"/>
+<text class="legend" x="1028" y="692" font-size="12" text-anchor="start">data store</text>
+<rect class="bx ext" x="1000" y="702" width="20" height="14" rx="3"/>
+<text class="legend" x="1028" y="714" font-size="12" text-anchor="start">external / deploy</text>
+</svg>

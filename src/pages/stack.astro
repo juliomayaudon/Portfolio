@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import T from '../components/T.astro';
+
+export const prerender = true;
+
+const groups = [
+  { title: { en: 'Code & automation', es: 'Código y automatización' },
+    items: ['Python', 'JavaScript', 'Google Apps Script', 'REST APIs', 'Webhooks', 'Streamlit', 'Full-Stack Web'] },
+  { title: { en: 'Marketing & CRM', es: 'Marketing y CRM' },
+    items: ['HubSpot', 'Salesforce', 'Apollo', 'ZoomInfo', 'Sales Navigator', 'Mailchimp'] },
+  { title: { en: 'Data & PM', es: 'Datos y PM' },
+    items: ['Power BI', 'Zapier', 'Make', 'Asana', 'Google Data Analytics', 'Slack'] },
+];
+
+const certs = [
+  'Google Project Management', 'Google Data Analytics', 'T2D3 Foundations',
+  'HubSpot Marketing Software', 'Inbound Marketing', 'Microsoft Power BI', 'EF SET English C2',
+];
+---
+<Base title="Stack - Julio Mayaudon">
+  <div class="wrap page-head">
+    <div class="kicker"><T en="Tools" es="Herramientas" /></div>
+    <h1><T en="Stack & technologies" es="Stack y tecnologías" /></h1>
+    <p><T en="The tools I use across the three verticals, plus certifications and education." es="Las herramientas que uso en las tres verticales, más certificaciones y formación." /></p>
+  </div>
+
+  <section>
+    <div class="wrap">
+      {groups.map((g) => (
+        <div class="stack-group">
+          <h3><T en={g.title.en} es={g.title.es} /></h3>
+          <div class="stack">
+            {g.items.map((it) => <span class="chip">{it}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker"><T en="Certifications & education" es="Certificaciones y formación" /></div>
+        <h2><T en="Backed by the right training" es="Respaldado por la formación adecuada" /></h2>
+      </div>
+      <div class="certs">
+        {certs.map((c) => <span class="cert">{c}</span>)}
+        <span class="cert"><T en="B.S. Computer Engineering, University of Burgos (in progress)" es="Ing. en Computación, Universidad de Burgos (en curso)" /></span>
+      </div>
+    </div>
+  </section>
+</Base>

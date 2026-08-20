@@ -1,0 +1,68 @@
+<svg viewBox="-40 -80 1220 1030" role="img" aria-label="Graviny container diagram: visitors and admins use a public React site and a separate admin portal that call a PHP API on MySQL, with a headless WordPress blog, deployed to Hostinger">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0.5,0.8 L9,5 L0.5,9.2" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text class="h" x="40" y="40" font-size="22" text-anchor="start">Graviny: container diagram</text>
+<text class="mut" x="42" y="66" font-size="13" text-anchor="start">C4 level 2 · two React builds + PHP/MySQL API + headless WordPress · deployed to Hostinger</text>
+<circle class="actor" cx="480" cy="74" r="11"/>
+<line class="actor" x1="480" y1="85" x2="480" y2="104"/>
+<path class="actor" d="M464,108 q16,-22 32,0"/>
+<text class="a-ext" x="480" y="130" font-size="13" text-anchor="middle">Visitor</text>
+<circle class="actor" cx="840" cy="74" r="11"/>
+<line class="actor" x1="840" y1="85" x2="840" y2="104"/>
+<path class="actor" d="M824,108 q16,-22 32,0"/>
+<text class="a-ext" x="840" y="130" font-size="13" text-anchor="middle">Admin</text>
+<g transform="rotate(-0.5 480 210)"><rect class="bx dev" x="330" y="158" width="300" height="104" rx="10"/></g>
+<text class="t" x="348" y="189" font-size="19" text-anchor="start">Public site</text>
+<text class="a-dev" x="348" y="210" font-size="13" text-anchor="start">React · Vite · Tailwind</text>
+<text class="mut" x="348" y="230" font-size="12.5" text-anchor="start">services · portfolio · blog</text>
+<text class="mut" x="348" y="246" font-size="12.5" text-anchor="start">contact · newsletter · EN/ES</text>
+<g transform="rotate(0.5 840 210)"><rect class="bx dev" x="700" y="158" width="280" height="104" rx="10"/></g>
+<text class="t" x="718" y="189" font-size="19" text-anchor="start">Admin portal</text>
+<text class="a-dev" x="718" y="210" font-size="13" text-anchor="start">React · Recharts</text>
+<text class="mut" x="718" y="230" font-size="12.5" text-anchor="start">dashboard · leads</text>
+<text class="mut" x="718" y="246" font-size="12.5" text-anchor="start">subscribers · content</text>
+<g><rect class="bx ext" x="40" y="160" width="250" height="96" rx="10"/></g>
+<text class="a-ext" x="58" y="188" font-size="14" text-anchor="start">WordPress</text>
+<text class="mut" x="58" y="208" font-size="12" text-anchor="start">headless CMS · blog</text>
+<text class="mut" x="58" y="228" font-size="12" text-anchor="start">consumed over REST</text>
+<path class="flow" d="M480,132 L480,158" marker-end="url(#ah)"/>
+<path class="flow" d="M840,132 L840,158" marker-end="url(#ah)"/>
+<path class="flow" d="M330,210 L290,208" marker-end="url(#ah)"/>
+<text class="mut" x="310.0" y="196" font-size="12" text-anchor="middle">blog · REST</text>
+<g transform="rotate(0.4 560 420)"><rect class="bx pm" x="380" y="360" width="360" height="120" rx="10"/></g>
+<text class="t" x="398" y="391" font-size="19" text-anchor="start">PHP API</text>
+<text class="a-pm" x="398" y="412" font-size="13" text-anchor="start">PHP · MySQL · secure auth</text>
+<text class="mut" x="398" y="432" font-size="12.5" text-anchor="start">leads · subscribers</text>
+<text class="mut" x="398" y="448" font-size="12.5" text-anchor="start">admin auth (bcrypt · tokens)</text>
+<path class="flow" d="M480,262 Q490,262 500,360" marker-end="url(#ah)"/>
+<text class="mut" x="470" y="316" font-size="12" text-anchor="middle">submit</text>
+<path class="flow" d="M840,262 Q760,262 680,360" marker-end="url(#ah)"/>
+<text class="mut" x="800" y="316" font-size="12" text-anchor="middle">HTTPS · token</text>
+<g transform="rotate(-0.5 560 655)"><rect class="bx abm" x="400" y="600" width="320" height="110" rx="10"/></g>
+<text class="t" x="418" y="631" font-size="19" text-anchor="start">MySQL</text>
+<text class="a-abm" x="418" y="652" font-size="13" text-anchor="start">Hostinger</text>
+<text class="mut" x="418" y="672" font-size="12.5" text-anchor="start">leads · subscribers · admins</text>
+<text class="mut" x="418" y="688" font-size="12.5" text-anchor="start">auth tokens · login attempts</text>
+<path class="flow" d="M560,480 L560,600" marker-end="url(#ah)"/>
+<text class="mut" x="560" y="545" font-size="12" text-anchor="middle">SQL</text>
+<text class="t" x="40" y="712" font-size="16" text-anchor="start">Deploy</text>
+<g><rect class="bx ext" x="40" y="726" width="210" height="54" rx="10"/></g>
+<text class="a-ext" x="58" y="750" font-size="12.5" text-anchor="start">build script</text>
+<text class="mut" x="58" y="768" font-size="11" text-anchor="start">site + admin + API</text>
+<g><rect class="bx ext" x="300" y="726" width="210" height="54" rx="10"/></g>
+<text class="a-ext" x="318" y="750" font-size="12.5" text-anchor="start">versioned zip</text>
+<text class="mut" x="318" y="768" font-size="11" text-anchor="start">v8 -> v11</text>
+<g><rect class="bx ext" x="560" y="726" width="230" height="54" rx="10"/></g>
+<text class="a-ext" x="578" y="750" font-size="12.5" text-anchor="start">Hostinger</text>
+<text class="mut" x="578" y="768" font-size="11" text-anchor="start">.htaccess routing</text>
+<path class="flow" d="M250,753 L300,753" marker-end="url(#ah)"/>
+<path class="flow" d="M510,753 L560,753" marker-end="url(#ah)"/>
+<text class="legend" x="880" y="702" font-size="13" text-anchor="start">Legend</text>
+<rect class="bx dev" x="880" y="712" width="20" height="14" rx="3"/>
+<text class="legend" x="908" y="724" font-size="12" text-anchor="start">frontend</text>
+<rect class="bx pm" x="880" y="734" width="20" height="14" rx="3"/>
+<text class="legend" x="908" y="746" font-size="12" text-anchor="start">backend / API</text>
+<rect class="bx abm" x="880" y="756" width="20" height="14" rx="3"/>
+<text class="legend" x="908" y="768" font-size="12" text-anchor="start">data store</text>
+<rect class="bx ext" x="880" y="778" width="20" height="14" rx="3"/>
+<text class="legend" x="908" y="790" font-size="12" text-anchor="start">external / deploy</text>
+</svg>

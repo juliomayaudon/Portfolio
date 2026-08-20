@@ -1,0 +1,84 @@
+<svg viewBox="-40 -80 1120 1030" role="img" aria-label="Kalungi ABM Tool container diagram: analysts and admins use a React SPA served by a FastAPI backend that runs Python ABM pipelines over PostgreSQL, calling external AI and data services, deployed on Railway">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0.5,0.8 L9,5 L0.5,9.2" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text class="h" x="40" y="44" font-size="23" text-anchor="start">Kalungi ABM Tool: container diagram</text>
+<text class="mut" x="42" y="70" font-size="13.5" text-anchor="start">C4 level 2 · one deployable (FastAPI serves the SPA) + Python pipelines + external services</text>
+<circle class="actor" cx="470" cy="112" r="11"/>
+<line class="actor" x1="470" y1="123" x2="470" y2="142"/>
+<path class="actor" d="M454,146 q16,-22 32,0"/>
+<text class="a-ext" x="470" y="168" font-size="13" text-anchor="middle">ABM analyst</text>
+<circle class="actor" cx="650" cy="112" r="11"/>
+<line class="actor" x1="650" y1="123" x2="650" y2="142"/>
+<path class="actor" d="M634,146 q16,-22 32,0"/>
+<text class="a-ext" x="650" y="168" font-size="13" text-anchor="middle">Admin</text>
+<g transform="rotate(-0.5 520 244)"><rect class="bx dev" x="360" y="192" width="320" height="104" rx="10"/></g>
+<text class="t" x="378" y="223" font-size="19" text-anchor="start">React SPA</text>
+<text class="a-dev" x="378" y="244" font-size="13" text-anchor="start">Vite · TypeScript · Tailwind</text>
+<text class="mut" x="378" y="264" font-size="12.5" text-anchor="start">one authenticated dashboard</text>
+<text class="mut" x="378" y="280" font-size="12.5" text-anchor="start">roles: admin / user / viewer</text>
+<path class="flow" d="M470,172 L470,192" marker-end="url(#ah)"/>
+<path class="flow" d="M650,172 L650,192" marker-end="url(#ah)"/>
+<g transform="rotate(0.4 520 392)"><rect class="bx pm" x="340" y="330" width="360" height="124" rx="10"/></g>
+<text class="t" x="358" y="361" font-size="19" text-anchor="start">FastAPI backend</text>
+<text class="a-pm" x="358" y="382" font-size="13" text-anchor="start">JWT auth · roles · workspaces</text>
+<text class="mut" x="358" y="402" font-size="12.5" text-anchor="start">serves the built SPA</text>
+<text class="mut" x="358" y="418" font-size="12.5" text-anchor="start">REST API + background workers</text>
+<path class="flow" d="M520,296 L520,330" marker-end="url(#ah)"/>
+<text class="mut" x="520" y="318" font-size="12" text-anchor="middle">HTTPS · JWT</text>
+<g transform="rotate(-0.5 175 395)"><rect class="bx dev" x="40" y="336" width="270" height="118" rx="10"/></g>
+<text class="t" x="58" y="367" font-size="19" text-anchor="start">ABM pipelines</text>
+<text class="a-dev" x="58" y="388" font-size="13" text-anchor="start">in-process workers</text>
+<text class="mut" x="58" y="408" font-size="12.5" text-anchor="start">abm_tool · abm_segments</text>
+<text class="mut" x="58" y="424" font-size="12.5" text-anchor="start">company_intel · tam_tool</text>
+<text class="mut" x="58" y="440" font-size="12.5" text-anchor="start">semaphore + AI timeouts</text>
+<path class="flow" d="M340,392 L312,395" marker-end="url(#ah)"/>
+<text class="mut" x="326" y="384" font-size="12" text-anchor="middle">runs</text>
+<g transform="rotate(0.5 530 618)"><rect class="bx abm" x="380" y="560" width="300" height="116" rx="10"/></g>
+<text class="t" x="398" y="591" font-size="19" text-anchor="start">PostgreSQL</text>
+<text class="a-abm" x="398" y="612" font-size="13" text-anchor="start">SQLAlchemy</text>
+<text class="mut" x="398" y="632" font-size="12.5" text-anchor="start">segments, companies,</text>
+<text class="mut" x="398" y="648" font-size="12.5" text-anchor="start">contacts, usage / caps</text>
+<path class="flow" d="M520,454 L520,560" marker-end="url(#ah)"/>
+<text class="mut" x="520" y="512" font-size="12" text-anchor="middle">SQL</text>
+<path class="flow" d="M175,454 Q302,454 430,560" marker-end="url(#ah)"/>
+<g><rect class="bx ext" x="770" y="180" width="270" height="58" rx="10"/></g>
+<text class="a-ext" x="790" y="206" font-size="13.5" text-anchor="start">AI models</text>
+<text class="mut" x="790" y="225" font-size="11.5" text-anchor="start">OpenAI · Claude</text>
+<path class="flow" d="M700,392 Q735,392 770,209" marker-end="url(#ah)"/>
+<g><rect class="bx ext" x="770" y="252" width="270" height="58" rx="10"/></g>
+<text class="a-ext" x="790" y="278" font-size="13.5" text-anchor="start">LinkedIn</text>
+<text class="mut" x="790" y="297" font-size="11.5" text-anchor="start">Sales Navigator · Voyager</text>
+<path class="flow" d="M700,392 Q735,392 770,281" marker-end="url(#ah)"/>
+<g><rect class="bx ext" x="770" y="324" width="270" height="58" rx="10"/></g>
+<text class="a-ext" x="790" y="350" font-size="13.5" text-anchor="start">HubSpot · Apollo</text>
+<text class="mut" x="790" y="369" font-size="11.5" text-anchor="start">Serper (web + news)</text>
+<path class="flow" d="M700,392 Q735,392 770,353" marker-end="url(#ah)"/>
+<g><rect class="bx ext" x="770" y="396" width="270" height="58" rx="10"/></g>
+<text class="a-ext" x="790" y="422" font-size="13.5" text-anchor="start">Google</text>
+<text class="mut" x="790" y="441" font-size="11.5" text-anchor="start">Sheets / Docs export</text>
+<path class="flow" d="M700,392 Q735,392 770,425" marker-end="url(#ah)"/>
+<g><rect class="bx ext" x="770" y="468" width="270" height="58" rx="10"/></g>
+<text class="a-ext" x="790" y="494" font-size="13.5" text-anchor="start">Public data</text>
+<text class="mut" x="790" y="513" font-size="11.5" text-anchor="start">BLS OES · US Census</text>
+<path class="flow" d="M700,392 Q735,392 770,497" marker-end="url(#ah)"/>
+<text class="t" x="40" y="726" font-size="17" text-anchor="start">CI / CD</text>
+<g><rect class="bx ext" x="40" y="742" width="200" height="56" rx="10"/></g>
+<text class="a-ext" x="58" y="768" font-size="13" text-anchor="start">git push main</text>
+<text class="mut" x="58" y="786" font-size="11" text-anchor="start">shared repo · rebase</text>
+<g><rect class="bx ext" x="300" y="742" width="240" height="56" rx="10"/></g>
+<text class="a-ext" x="318" y="768" font-size="13" text-anchor="start">Railway build</text>
+<text class="mut" x="318" y="786" font-size="11" text-anchor="start">Docker multi-stage</text>
+<g><rect class="bx ext" x="600" y="742" width="240" height="56" rx="10"/></g>
+<text class="a-ext" x="618" y="768" font-size="13" text-anchor="start">deploy</text>
+<text class="mut" x="618" y="786" font-size="11" text-anchor="start">/api/health · SHA check</text>
+<path class="flow" d="M240,770 L300,770" marker-end="url(#ah)"/>
+<path class="flow" d="M540,770 L600,770" marker-end="url(#ah)"/>
+<text class="legend" x="900" y="732" font-size="13" text-anchor="start">Legend</text>
+<rect class="bx dev" x="900" y="742" width="20" height="14" rx="3"/>
+<text class="legend" x="928" y="754" font-size="12" text-anchor="start">frontend / pipelines</text>
+<rect class="bx pm" x="900" y="764" width="20" height="14" rx="3"/>
+<text class="legend" x="928" y="776" font-size="12" text-anchor="start">backend / API</text>
+<rect class="bx abm" x="900" y="786" width="20" height="14" rx="3"/>
+<text class="legend" x="928" y="798" font-size="12" text-anchor="start">data store</text>
+<rect class="bx ext" x="900" y="808" width="20" height="14" rx="3"/>
+<text class="legend" x="928" y="820" font-size="12" text-anchor="start">external / CI-CD</text>
+</svg>

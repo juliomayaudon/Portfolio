@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import T from '../components/T.astro';
+
+export const prerender = true;
+
+const jobs = [
+  {
+    role: { en: 'Technical Project Manager (ABM & Ops), Kalungi', es: 'Technical Project Manager (ABM y Ops), Kalungi' },
+    meta: { en: 'Feb 2023 - Present · Seattle, USA (remote)', es: 'Feb 2023 - Presente · Seattle, USA (remoto)' },
+    desc: {
+      en: 'Primary technical liaison for CMOs and stakeholders. Led cross-functional teams, designed automated frameworks adopted company-wide, and built scripts that cut process time by 80%.',
+      es: 'Enlace técnico principal para CMOs y stakeholders. Lideré equipos cross-funcionales, diseñé frameworks automatizados adoptados en toda la empresa y construí scripts que redujeron el tiempo de procesos en 80%.',
+    },
+  },
+  {
+    role: { en: 'Web & Platform Developer, Graviny', es: 'Web & Platform Developer, Graviny' },
+    meta: { en: 'Sep 2025 - Present · Remote', es: 'Sep 2025 - Presente · Remoto' },
+    desc: {
+      en: 'Built the full web platform for a marketing consultancy end to end: the public bilingual site, a custom admin portal for leads and content, a headless WordPress blog, and the deployment.',
+      es: 'Construí de punta a punta la plataforma web de una consultora de marketing: el sitio público bilingüe, un portal de admin a medida para leads y contenido, un blog headless en WordPress y el despliegue.',
+    },
+  },
+  {
+    role: { en: 'Product Owner & Technical Lead, Meduco', es: 'Product Owner y Technical Lead, Meduco' },
+    meta: { en: 'Dec 2025 - Present · Cuenca, Ecuador', es: 'Dic 2025 - Presente · Cuenca, Ecuador' },
+    desc: {
+      en: 'Architected and developed a full EdTech ecosystem for medical professionals: public site, LMS, and admin dashboard, from market research to deployment.',
+      es: 'Diseñé y desarrollé un ecosistema EdTech completo para profesionales médicos: sitio público, LMS y panel administrativo, desde la investigación de mercado hasta el despliegue.',
+    },
+  },
+  {
+    role: { en: 'Marketing Operations Manager, Quash', es: 'Marketing Operations Manager, Quash' },
+    meta: { en: 'Apr 2022 - Jan 2025 · Miami, USA', es: 'Abr 2022 - Ene 2025 · Miami, USA' },
+    desc: {
+      en: 'Designed B2B marketing automation, managed complex CRM environments, and built executive KPI dashboards to drive strategy.',
+      es: 'Diseñé automatización de marketing B2B, gestioné entornos CRM complejos y construí dashboards de KPIs ejecutivos para guiar la estrategia.',
+    },
+  },
+  {
+    role: { en: 'Earlier: Webleads, Jacidi, eRoom Suites, Promoter Tantalo', es: 'Antes: Webleads, Jacidi, eRoom Suites, Promoter Tantalo' },
+    meta: { en: '2020 - 2022 · Spain, Argentina, Venezuela', es: '2020 - 2022 · España, Argentina, Venezuela' },
+    desc: {
+      en: 'Commercial and marketing roles across B2B: lead generation, CRM management, data analysis, and early automation tools built in JavaScript and Google Apps Script.',
+      es: 'Roles comerciales y de marketing en B2B: generación de leads, gestión de CRM, análisis de datos y primeras herramientas de automatización hechas en JavaScript y Google Apps Script.',
+    },
+  },
+];
+---
+<Base title="Experience - Julio Mayaudon">
+  <div class="wrap page-head">
+    <div class="kicker"><T en="Career" es="Trayectoria" /></div>
+    <h1><T en="Experience" es="Experiencia" /></h1>
+    <p><T en="From marketing operations into technical leadership and product ownership." es="De operaciones de marketing hacia el liderazgo técnico y la propiedad de producto." /></p>
+  </div>
+
+  <section>
+    <div class="wrap narrow">
+      <div class="timeline">
+        {jobs.map((j) => (
+          <div class="tl-item">
+            <div class="role"><T en={j.role.en} es={j.role.es} /></div>
+            <div class="meta"><T en={j.meta.en} es={j.meta.es} /></div>
+            <div class="desc"><T en={j.desc.en} es={j.desc.es} /></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

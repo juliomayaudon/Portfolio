@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import T from '../../components/T.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { allProjects } from '../../data/projects';
+
+export const prerender = true;
+---
+<Base title="Projects - Julio Mayaudon">
+  <div class="wrap page-head">
+    <div class="kicker"><T en="Projects" es="Proyectos" /></div>
+    <h1><T en="Selected work" es="Trabajo destacado" /></h1>
+    <p><T en="Products and programs I have owned, from ABM to full software builds. Click any project for the full breakdown: problem, solution, tech stack, architecture, and screenshots." es="Productos y programas que he liderado, desde ABM hasta desarrollos completos de software. Entra a cualquiera para ver el detalle: problema, solución, tech stack, arquitectura y capturas." /></p>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="projects">
+        {allProjects.map((p) => <ProjectCard project={p} />)}
+      </div>
+    </div>
+  </section>
+</Base>

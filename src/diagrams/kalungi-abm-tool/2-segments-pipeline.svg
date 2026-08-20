@@ -1,0 +1,61 @@
+<svg viewBox="-40 -80 1190 1150" role="img" aria-label="ABM Segments pipeline: the orchestrator qualifies each company via LinkedIn, web and news search and an AI verdict, then extracts and enriches contacts and syncs to HubSpot, persisting to PostgreSQL">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0.5,0.8 L9,5 L0.5,9.2" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text class="h" x="40" y="44" font-size="22" text-anchor="start">Kalungi ABM Tool: the Segments pipeline (component diagram)</text>
+<text class="mut" x="42" y="70" font-size="13.5" text-anchor="start">C4 level 3 · company qualification + contact extraction and enrichment</text>
+<g transform="rotate(-0.4 490 146)"><rect class="bx dev" x="340" y="90" width="300" height="112" rx="10"/></g>
+<text class="t" x="358" y="121" font-size="19" text-anchor="start">Segment page</text>
+<text class="a-dev" x="358" y="142" font-size="13" text-anchor="start">React · authFetch</text>
+<text class="mut" x="358" y="162" font-size="12.5" text-anchor="start">add companies, watch status</text>
+<g transform="rotate(0.4 490 282)"><rect class="bx pm" x="340" y="226" width="300" height="112" rx="10"/></g>
+<text class="t" x="358" y="257" font-size="19" text-anchor="start">Orchestrator</text>
+<text class="a-pm" x="358" y="278" font-size="13" text-anchor="start">status machine</text>
+<text class="mut" x="358" y="298" font-size="12.5" text-anchor="start">worker semaphore (up to 20)</text>
+<text class="mut" x="358" y="314" font-size="12.5" text-anchor="start">pending -> running -> done</text>
+<g transform="rotate(-0.4 490 418)"><rect class="bx pm" x="340" y="362" width="300" height="112" rx="10"/></g>
+<text class="t" x="358" y="393" font-size="19" text-anchor="start">Company qualifier</text>
+<text class="a-pm" x="358" y="414" font-size="13" text-anchor="start">AI verdict + score</text>
+<text class="mut" x="358" y="434" font-size="12.5" text-anchor="start">qualified / not / unclear</text>
+<text class="mut" x="358" y="450" font-size="12.5" text-anchor="start">+ manual override</text>
+<g transform="rotate(0.4 490 554)"><rect class="bx pm" x="340" y="498" width="300" height="112" rx="10"/></g>
+<text class="t" x="358" y="529" font-size="19" text-anchor="start">Contact extractor</text>
+<text class="a-pm" x="358" y="550" font-size="13" text-anchor="start">Sales Nav lead search</text>
+<text class="mut" x="358" y="570" font-size="12.5" text-anchor="start">dedup by stable id</text>
+<text class="mut" x="358" y="586" font-size="12.5" text-anchor="start"><=1000-result slices</text>
+<g transform="rotate(-0.4 490 690)"><rect class="bx pm" x="340" y="634" width="300" height="112" rx="10"/></g>
+<text class="t" x="358" y="665" font-size="19" text-anchor="start">Contact enricher</text>
+<text class="a-pm" x="358" y="686" font-size="13" text-anchor="start">title + persona score</text>
+<text class="mut" x="358" y="706" font-size="12.5" text-anchor="start">fallback chain</text>
+<text class="mut" x="358" y="722" font-size="12.5" text-anchor="start">daily caps per account</text>
+<g><rect class="bx ext" x="740" y="362" width="340" height="112" rx="10"/></g>
+<text class="t" x="758" y="393" font-size="19" text-anchor="start">Signals + AI</text>
+<text class="mut" x="758" y="414" font-size="12.5" text-anchor="start">LinkedIn scrape · Serper web + news</text>
+<text class="mut" x="758" y="430" font-size="12.5" text-anchor="start">web scrape -> OpenAI / Claude</text>
+<g><rect class="bx ext" x="740" y="498" width="340" height="112" rx="10"/></g>
+<text class="t" x="758" y="529" font-size="19" text-anchor="start">LinkedIn Sales Navigator</text>
+<text class="mut" x="758" y="550" font-size="12.5" text-anchor="start">lead search API</text>
+<text class="mut" x="758" y="566" font-size="12.5" text-anchor="start">identity = stable member id</text>
+<g><rect class="bx ext" x="740" y="634" width="340" height="112" rx="10"/></g>
+<text class="t" x="758" y="665" font-size="19" text-anchor="start">Enrichment + sync</text>
+<text class="mut" x="758" y="686" font-size="12.5" text-anchor="start">Apollo -> LinkedIn -> LLM -> photo</text>
+<text class="mut" x="758" y="702" font-size="12.5" text-anchor="start">OpenAI persona · HubSpot sync</text>
+<path class="flow" d="M490,202 L490,226" marker-end="url(#ah)"/>
+<text class="mut" x="562.0" y="218.0" font-size="12" text-anchor="start">queue</text>
+<path class="flow" d="M490,338 L490,362" marker-end="url(#ah)"/>
+<text class="mut" x="562.0" y="354.0" font-size="12" text-anchor="start">per company</text>
+<path class="flow" d="M490,474 L490,498" marker-end="url(#ah)"/>
+<text class="mut" x="562.0" y="490.0" font-size="12" text-anchor="start">qualified</text>
+<path class="flow" d="M490,610 L490,634" marker-end="url(#ah)"/>
+<text class="mut" x="562.0" y="626.0" font-size="12" text-anchor="start">enrich</text>
+<path class="flow" d="M640,418 L740,418" marker-end="url(#ah)"/>
+<text class="mut" x="690.0" y="409.0" font-size="12" text-anchor="middle">gather + score</text>
+<path class="flow" d="M640,554 L740,554" marker-end="url(#ah)"/>
+<text class="mut" x="690.0" y="545.0" font-size="12" text-anchor="middle">Sales Nav</text>
+<path class="flow" d="M640,690 L740,690" marker-end="url(#ah)"/>
+<text class="mut" x="690.0" y="681.0" font-size="12" text-anchor="middle">enrich + sync</text>
+<g><rect class="bx abm" x="200" y="828" width="760" height="120" rx="10"/></g>
+<text class="t" x="222" y="862" font-size="18" text-anchor="start">PostgreSQL</text>
+<text class="mut" x="222" y="886" font-size="13" text-anchor="start">segments · companies · contacts</text>
+<text class="mut" x="222" y="906" font-size="13" text-anchor="start">usage / caps (per-account daily limits)</text>
+<path class="flow" d="M490,746 L490,828" marker-end="url(#ah)"/>
+<text class="mut" x="554.0" y="787.0" font-size="12" text-anchor="start">persist</text>
+</svg>

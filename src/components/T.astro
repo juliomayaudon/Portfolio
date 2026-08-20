@@ -1,0 +1,10 @@
+---
+// Bilingual text helper. Renders both languages; the active one is shown
+// via the [data-lang] rules in global.css and the toggle in Base.astro.
+interface Props {
+  en: string;
+  es: string;
+}
+const { en, es } = Astro.props;
+---
+<span class="en">{en}</span><span class="es">{es}</span>

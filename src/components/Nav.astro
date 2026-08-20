@@ -1,0 +1,30 @@
+---
+import T from './T.astro';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const links = [
+  { href: '/what-i-do', en: 'What I do', es: 'Qué hago' },
+  { href: '/projects', en: 'Projects', es: 'Proyectos' },
+  { href: '/experience', en: 'Experience', es: 'Experiencia' },
+  { href: '/stack', en: 'Stack', es: 'Stack' },
+];
+const isActive = (href: string) => path === href || path.startsWith(href + '/');
+---
+<nav>
+  <div class="wrap">
+    <a href="/" class="brand">Julio Mayaudon<span>.</span></a>
+    <div class="navlinks">
+      {links.map((l) => (
+        <a href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}>
+          <T en={l.en} es={l.es} />
+        </a>
+      ))}
+    </div>
+    <div class="nav-right">
+      <button class="toggle" type="button" onclick="toggleLang()" aria-label="Toggle language / cambiar idioma">
+        <span id="t-en" class="on">EN</span><span class="sep">/</span><span id="t-es">ES</span>
+      </button>
+      <a href="/#contact" class="btn sm"><T en="Contact" es="Contacto" /></a>
+    </div>
+  </div>
+</nav>

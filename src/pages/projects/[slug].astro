@@ -1,0 +1,347 @@
+---
+import Base from '../../layouts/Base.astro';
+import T from '../../components/T.astro';
+import { allProjects } from '../../data/projects';
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return allProjects.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+const { project: p } = Astro.props;
+
+// Inline hand-drawn diagrams (src/diagrams/<slug>/<order>-<name>.svg). Injected
+// into the page so they inherit currentColor + the theme palette, adapt to both
+// styles, and get the zoom/pan behavior. A project can have several diagrams.
+const diagramModules = import.meta.glob('../../diagrams/*/*.svg', { query: '?raw', import: 'default', eager: true });
+const bySlug: Record<string, { file: string; key: string; svg: string }[]> = {};
+for (const path in diagramModules) {
+  const parts = path.split('/');
+  const file = parts[parts.length - 1];
+  const slug = parts[parts.length - 2];
+  (bySlug[slug] ||= []).push({ file, key: `${slug}/${file}`, svg: diagramModules[path] as string });
+}
+for (const s in bySlug) bySlug[s].sort((a, b) => a.file.localeCompare(b.file));
+const diagrams = bySlug[p.slug] || [];
+
+// Human titles for each diagram (bilingual).
+const diagramTitles: Record<string, { en: string; es: string }> = {
+  'meduco/1-container.svg': { en: 'Container diagram (C4 level 2)', es: 'Diagrama de contenedores (C4 nivel 2)' },
+  'meduco/2-simulator.svg': { en: 'Component diagram: the Simulator (C4 level 3)', es: 'Diagrama de componentes: el Simulador (C4 nivel 3)' },
+  'kalungi-abm-tool/1-container.svg': { en: 'Container diagram (C4 level 2)', es: 'Diagrama de contenedores (C4 nivel 2)' },
+  'kalungi-abm-tool/2-segments-pipeline.svg': { en: 'Component diagram: the Segments pipeline (C4 level 3)', es: 'Diagrama de componentes: el pipeline de Segments (C4 nivel 3)' },
+  'graviny/1-container.svg': { en: 'Container diagram (C4 level 2)', es: 'Diagrama de contenedores (C4 nivel 2)' },
+  'graviny/2-backend.svg': { en: 'Component diagram: the backend (C4 level 3)', es: 'Diagrama de componentes: el backend (C4 nivel 3)' },
+  'acopio-venezuela/1-container.svg': { en: 'Container diagram (C4 level 2)', es: 'Diagrama de contenedores (C4 nivel 2)' },
+  'acopio-venezuela/2-inventory.svg': { en: 'Component diagram: the inventory ledger (C4 level 3)', es: 'Diagrama de componentes: el libro de inventario (C4 nivel 3)' },
+};
+---
+<Base title={`${p.name} - Julio Mayaudon`} description={p.summary.en}>
+  <div class="wrap back-row"><a href="/projects" class="back"><T en="← Back to projects" es="← Volver a proyectos" /></a></div>
+
+  <div class="wrap proj-cover">
+    {p.cover ? (
+      <img src={p.cover} alt={p.name} />
+    ) : (
+      <div class="placeholder cover">
+        <T en="Cover / hero image goes here. Drop it in public/projects/{slug}/" es="Aquí va la imagen de portada. Ponla en public/projects/{slug}/" />
+      </div>
+    )}
+  </div>
+
+  <div class="wrap proj-hero">
+    <h1>{p.name}</h1>
+    <div class="role"><T en={p.role.en} es={p.role.es} /> · {p.period} · {p.location}</div>
+    {p.team && <div class="proj-team"><T en={p.team.en} es={p.team.es} /></div>}
+    <div class="proj-tags">
+      <span class="tag"><span class="dot" style={`background:${p.tagColor}`}></span> {p.tagLabel}</span>
+    </div>
+  </div>
+
+  <div class="wrap proj-layout">
+    <div class="proj-body">
+      {p.highlights && p.highlights.length > 0 && (
+        <div class="highlights">
+          {p.highlights.map((h) => <span class="hl"><T en={h.en} es={h.es} /></span>)}
+        </div>
+      )}
+      <p style="font-size:16px;color:var(--text-1)"><T en={p.overview.en} es={p.overview.es} /></p>
+
+      <h2><T en="The problem" es="El problema" /></h2>
+      <p><T en={p.problem.en} es={p.problem.es} /></p>
+
+      <h2><T en="What I did" es="Qué hice" /></h2>
+      <p><T en={p.solution.en} es={p.solution.es} /></p>
+
+      <h2><T en="Architecture" es="Arquitectura" /></h2>
+      {diagrams.length > 0 ? (
+        diagrams.map((d) => (
+          <figure class="figure">
+            {diagramTitles[d.key] && (
+              <div class="diagram-title"><T en={diagramTitles[d.key].en} es={diagramTitles[d.key].es} /></div>
+            )}
+            <div class="sketch canvas" set:html={d.svg}></div>
+            <figcaption>
+              <T en="Ctrl/Cmd + scroll to zoom, drag to pan, double-click to reset." es="Ctrl/Cmd + rueda para zoom, arrastra para mover, doble clic para reencuadrar." />
+            </figcaption>
+          </figure>
+        ))
+      ) : p.diagram ? (
+        <figure class="figure">
+          <img src={p.diagram} alt={`${p.name} architecture`} />
+          <figcaption><T en="Software architecture." es="Arquitectura del software." /></figcaption>
+        </figure>
+      ) : (
+        <figure class="figure">
+          <div class="placeholder diagram">
+            <T en="Architecture diagram goes here (src/diagrams/{slug}/)." es="Aquí va el diagrama de arquitectura (src/diagrams/{slug}/)." />
+          </div>
+        </figure>
+      )}
+
+      {p.decisions && p.decisions.length > 0 && (
+        <>
+          <h2><T en="Key decisions & trade-offs" es="Decisiones clave y trade-offs" /></h2>
+          <div class="kv-list">
+            {p.decisions.map((d) => (
+              <div class="kv">
+                <h4><T en={d.title.en} es={d.title.es} /></h4>
+                <p><T en={d.body.en} es={d.body.es} /></p>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {p.challenges && p.challenges.length > 0 && (
+        <>
+          <h2><T en="Challenges & how I solved them" es="Retos y cómo los resolví" /></h2>
+          <div class="kv-list">
+            {p.challenges.map((c) => (
+              <div class="kv">
+                <h4><T en={c.title.en} es={c.title.es} /></h4>
+                <p><T en={c.body.en} es={c.body.es} /></p>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      <h2><T en="Results" es="Resultados" /></h2>
+      <ul>
+        {p.results.map((r) => <li><T en={r.en} es={r.es} /></li>)}
+      </ul>
+
+      <h2><T en="Gallery" es="Galería" /></h2>
+      {p.gallery.length > 0 ? (
+        <div class="gallery">
+          {p.gallery.slice(0, 4).map((g, i) => (
+            <figure class="gitem" data-idx={i}>
+              <img src={g.src} alt={`${p.name} screenshot ${i + 1}`} loading="lazy" />
+              {i === 3 && p.gallery.length > 4 && <span class="gmore">+{p.gallery.length - 4}</span>}
+            </figure>
+          ))}
+        </div>
+      ) : (
+        <div class="placeholder"><T en="Project screenshots go here. Drop them in public/projects/{slug}/gallery/ and list them in src/data/projects.ts (with a caption)." es="Aquí van las capturas del proyecto. Ponlas en public/projects/{slug}/gallery/ y agrégalas en src/data/projects.ts (con su descripción)." /></div>
+      )}
+    </div>
+
+    <aside class="proj-side">
+      <div class="side-block">
+        <h4><T en="Tech stack" es="Tech stack" /></h4>
+        <div class="side-stack">
+          {p.stack.map((s) => <span class="chip">{s}</span>)}
+        </div>
+        {p.stackNote && (
+          <p style="font-size:12px;color:var(--text-3);margin-top:10px"><T en={p.stackNote.en} es={p.stackNote.es} /></p>
+        )}
+      </div>
+
+      <div class="side-block">
+        <h4><T en="Role" es="Rol" /></h4>
+        <p style="font-size:14px;color:var(--text-2)"><T en={p.role.en} es={p.role.es} /></p>
+      </div>
+
+      {p.links.length > 0 && (
+        <div class="side-block">
+          <h4><T en="Links" es="Enlaces" /></h4>
+          <div class="side-links">
+            {p.links.map((l) => <a href={l.href} target="_blank" rel="noopener" class="btn ghost sm">{l.label} ↗</a>)}
+          </div>
+        </div>
+      )}
+    </aside>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var MIN = 0.5, MAX = 10;
+
+      function init() {
+        document.querySelectorAll('.canvas').forEach(function (wrap) {
+          if (wrap.dataset.zoomReady) return;
+          var svg = wrap.querySelector('svg');
+          if (!svg || !svg.getAttribute('viewBox')) return;
+          wrap.dataset.zoomReady = '1';
+
+          var p = svg.getAttribute('viewBox').split(/[\s,]+/).map(Number);
+          var base = { x: p[0], y: p[1], w: p[2], h: p[3] };
+          var vb = Object.assign({}, base);
+
+          var ctl = document.createElement('div');
+          ctl.className = 'zoomctl';
+          ctl.innerHTML = '<button type="button" data-z="out" aria-label="Zoom out">&minus;</button>'
+                        + '<button type="button" data-z="in" aria-label="Zoom in">+</button>'
+                        + '<button type="button" data-z="fit">fit</button>';
+          var lvl = document.createElement('div');
+          lvl.className = 'zoomlvl';
+          var isES = document.documentElement.getAttribute('data-lang') === 'es';
+          var hint = document.createElement('div');
+          hint.className = 'zoomhint';
+          hint.textContent = isES ? 'Ctrl/Cmd + rueda para zoom · arrastra para mover' : 'Ctrl/Cmd + scroll to zoom · drag to pan';
+          wrap.appendChild(ctl); wrap.appendChild(lvl); wrap.appendChild(hint);
+
+          function apply() {
+            svg.setAttribute('viewBox', [vb.x, vb.y, vb.w, vb.h].join(' '));
+            var z = base.w / vb.w;
+            lvl.textContent = Math.round(z * 100) + '%';
+            hint.style.opacity = z > 1.02 ? '0' : '1';
+          }
+          function reset() { vb = Object.assign({}, base); apply(); }
+          wrap.zreset = reset;
+
+          function unitsPerPx() {
+            var r = svg.getBoundingClientRect();
+            if (!r.width || !r.height) return 1;
+            return 1 / Math.min(r.width / vb.w, r.height / vb.h);
+          }
+
+          function zoomAt(mult, cx, cy) {
+            var z = base.w / vb.w;
+            var nz = Math.min(MAX, Math.max(MIN, z * mult));
+            var f = z / nz;
+            var pt, m = svg.getScreenCTM();
+            if (m && svg.createSVGPoint) {
+              var s = svg.createSVGPoint(); s.x = cx; s.y = cy;
+              pt = s.matrixTransform(m.inverse());
+            } else {
+              pt = { x: vb.x + vb.w / 2, y: vb.y + vb.h / 2 };
+            }
+            vb.x = pt.x - (pt.x - vb.x) * f;
+            vb.y = pt.y - (pt.y - vb.y) * f;
+            vb.w = vb.w * f;
+            vb.h = vb.h * f;
+            apply();
+          }
+
+          // Embedded in a scrolling page: require Ctrl/Cmd so the wheel still scrolls.
+          svg.addEventListener('wheel', function (e) {
+            if (!e.ctrlKey && !e.metaKey) return;
+            e.preventDefault();
+            zoomAt(e.deltaY < 0 ? 1.14 : 1 / 1.14, e.clientX, e.clientY);
+          }, { passive: false });
+
+          var drag = null;
+          svg.addEventListener('pointerdown', function (e) {
+            if (e.button !== 0) return;
+            drag = { x: e.clientX, y: e.clientY, k: unitsPerPx() };
+            wrap.classList.add('dragging');
+            try { svg.setPointerCapture(e.pointerId); } catch (err) {}
+          });
+          svg.addEventListener('pointermove', function (e) {
+            if (!drag) return;
+            vb.x -= (e.clientX - drag.x) * drag.k;
+            vb.y -= (e.clientY - drag.y) * drag.k;
+            drag.x = e.clientX; drag.y = e.clientY;
+            apply();
+          });
+          function end(e) {
+            if (!drag) return;
+            drag = null; wrap.classList.remove('dragging');
+            try { svg.releasePointerCapture(e.pointerId); } catch (err) {}
+          }
+          svg.addEventListener('pointerup', end);
+          svg.addEventListener('pointercancel', end);
+
+          svg.addEventListener('dblclick', reset);
+          ctl.addEventListener('click', function (e) {
+            var b = e.target.closest && e.target.closest('button');
+            if (!b) return;
+            var r = svg.getBoundingClientRect();
+            var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+            var z = b.getAttribute('data-z');
+            if (z === 'in') zoomAt(1.3, cx, cy);
+            if (z === 'out') zoomAt(1 / 1.3, cx, cy);
+            if (z === 'fit') reset();
+          });
+
+          apply();
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+      window.addEventListener('beforeprint', function () {
+        document.querySelectorAll('.canvas').forEach(function (w) { if (w.zreset) w.zreset(); });
+      });
+    })();
+  </script>
+
+  <script is:inline define:vars={{ items: p.gallery }}>
+    (function () {
+      if (!items || !items.length) return;
+      var idx = 0;
+      var lb = document.createElement('div');
+      lb.className = 'lightbox';
+      lb.innerHTML =
+        '<button class="lb-close" type="button" aria-label="Close">✕</button>' +
+        '<button class="lb-btn lb-prev" type="button" aria-label="Previous">‹</button>' +
+        '<button class="lb-btn lb-next" type="button" aria-label="Next">›</button>' +
+        '<div class="lb-count"></div>' +
+        '<img alt="">' +
+        '<div class="lb-cap"></div>';
+      document.body.appendChild(lb);
+      var img = lb.querySelector('img');
+      var cap = lb.querySelector('.lb-cap');
+      var cnt = lb.querySelector('.lb-count');
+      if (items.length < 2) {
+        lb.querySelector('.lb-prev').style.display = 'none';
+        lb.querySelector('.lb-next').style.display = 'none';
+        cnt.style.display = 'none';
+      }
+      function render() {
+        var it = items[idx];
+        img.src = it.src;
+        cnt.textContent = (idx + 1) + ' / ' + items.length;
+        cap.textContent = '';
+        if (it.caption) {
+          var en = document.createElement('span'); en.className = 'en'; en.textContent = it.caption.en || '';
+          var es = document.createElement('span'); es.className = 'es'; es.textContent = it.caption.es || '';
+          cap.appendChild(en); cap.appendChild(es);
+        }
+      }
+      function open(i) { idx = i; render(); lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      function close() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+      function next() { idx = (idx + 1) % items.length; render(); }
+      function prev() { idx = (idx - 1 + items.length) % items.length; render(); }
+      document.querySelectorAll('.gitem').forEach(function (el) {
+        el.addEventListener('click', function () { open(parseInt(el.getAttribute('data-idx'), 10) || 0); });
+      });
+      lb.querySelector('.lb-close').addEventListener('click', close);
+      lb.querySelector('.lb-next').addEventListener('click', function (e) { e.stopPropagation(); next(); });
+      lb.querySelector('.lb-prev').addEventListener('click', function (e) { e.stopPropagation(); prev(); });
+      lb.addEventListener('click', function (e) { if (e.target === lb || e.target === img) { /* keep image click open */ if (e.target === lb) close(); } });
+      document.addEventListener('keydown', function (e) {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape') close();
+        else if (e.key === 'ArrowRight') next();
+        else if (e.key === 'ArrowLeft') prev();
+      });
+    })();
+  </script>
+</Base>

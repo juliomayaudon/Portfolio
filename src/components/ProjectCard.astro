@@ -1,0 +1,33 @@
+---
+import T from './T.astro';
+import type { Project } from '../data/projects';
+
+interface Props { project: Project; banner?: boolean }
+const { project: p, banner = true } = Astro.props;
+---
+<a class="pcard" href={`/projects/${p.slug}`}>
+  {banner && (p.cover ? (
+    <div class="pbanner" style={`background-image:url(${p.cover})`}></div>
+  ) : (
+    <div class="pbanner pbanner-empty" style={`--tc:${p.tagColor}`}></div>
+  ))}
+  <div class="top">
+    <div>
+      <h3>{p.name}</h3>
+      <div class="role"><T en={p.role.en} es={p.role.es} /></div>
+    </div>
+    <span class="tag"><span class="dot" style={`background:${p.tagColor}`}></span> {p.tagLabel}</span>
+  </div>
+  <p class="desc"><T en={p.summary.en} es={p.summary.es} /></p>
+  <div class="pmetrics">
+    {p.metrics.map((m) => (
+      <div>
+        <div class={m.good ? 'num good' : 'num'}>
+          {m.value ? m.value : <T en={m.valueEn ?? ''} es={m.valueEs ?? ''} />}
+        </div>
+        <div class="lbl"><T en={m.label.en} es={m.label.es} /></div>
+      </div>
+    ))}
+  </div>
+  <div class="arrow"><T en="View project →" es="Ver proyecto →" /></div>
+</a>
